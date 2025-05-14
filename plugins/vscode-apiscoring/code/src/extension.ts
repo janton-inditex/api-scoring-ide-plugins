@@ -153,7 +153,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 export async function file(serviceUrl: any, doc: any, response: ValidationFileModuleType, certificationFrontEnd: any) {
 
-    let tmpDir: fs.PathLike;
+    let tmpDir: fs.PathLike = "";
     vscode.window.withProgress({
         location: vscode.ProgressLocation.Notification,
         title: 'Loading Validation Results',
@@ -184,7 +184,7 @@ export async function file(serviceUrl: any, doc: any, response: ValidationFileMo
                 } catch (err: any) {
                     console.log('Error writing:' + err.message);
                 } finally {
-                    if (tmpDir) {
+                    if (tmpDir && tmpDir !== "") {
                         fs.rm(tmpDir, { recursive: true }, (err) => {
                             if (err) {
                                 console.error(err.message);
